@@ -46,7 +46,6 @@ class Filter extends Component {
     }
   };
   render() {
-    console.log(this.state.selected);
     return (
       <div>
         <div
@@ -76,7 +75,8 @@ class Filter extends Component {
                   : "hsl(0, 0%, 100%)",
                 color: this.props.darkMode
                   ? "hsl(0, 0%, 100%)"
-                  : "hsl(200, 15%, 8%)"
+                  : "hsl(200, 15%, 8%)",
+                zIndex: 1
               }}
             >
               {Regions.map(filter => (
@@ -100,7 +100,10 @@ class Filter extends Component {
                       : "hsl(200, 15%, 8%)"
                   }}
                   onClick={() => {
-                    this.setState({ selected: filter.key });
+                    this.setState(state => ({
+                      selected:
+                        state.selected === filter.key ? null : filter.key
+                    }));
                   }}
                 >
                   {filter.value}
