@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+  font-family: "NunitoSans-Regular" !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+@font-face {
+  font-family: "NunitoSans-Regular";
+  src: url("./assets/NunitoSans-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.searchbar {
+  width: 500px;
+  box-shadow: 0px 1px 8px -4px hsl(200, 15%, 8%);
+  background-color: white;
+}
+
+.filter {
+  width: 200px;
+  box-shadow: 0px 1px 8px -4px hsl(200, 15%, 8%);
+  background-color: white;
+  padding: 12px 20px;
+}
+
+input {
+  margin-left: 50px;
+  outline: none;
+  border: none;
+  width: 90%;
+}
