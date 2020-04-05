@@ -2,30 +2,30 @@ import React, { Component } from "react";
 
 const Regions = [
   {
-    key: 1,
+    key: "africa",
     value: "Africa"
   },
   {
-    key: 2,
+    key: "americas",
     value: "Americas"
   },
   {
-    key: 3,
+    key: "asia",
     value: "Asia"
   },
   {
-    key: 4,
+    key: "europe",
     value: "Europe"
   },
   {
-    key: 5,
+    key: "oceania",
     value: "Oceania"
   }
 ];
 class Filter extends Component {
   state = {
     clicked: false,
-    selected: null
+    selected: this.props.filter
   };
   selectBtn = [];
   componentDidMount() {
@@ -100,10 +100,19 @@ class Filter extends Component {
                       : "hsl(200, 15%, 8%)"
                   }}
                   onClick={() => {
-                    this.setState(state => ({
-                      selected:
-                        state.selected === filter.key ? null : filter.key
-                    }));
+                    this.setState(
+                      state => ({
+                        selected:
+                          state.selected === filter.key ? "" : filter.key
+                      }),
+                      () => {
+                        this.props.getCountriesByRange({
+                          name: filter.value.toLowerCase(),
+                          page: 0
+                        });
+                        this.props.getFilter(filter.value.toLowerCase());
+                      }
+                    );
                   }}
                 >
                   {filter.value}

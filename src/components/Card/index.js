@@ -8,8 +8,10 @@ const Card = props => {
         backgroundColor: props.darkMode
           ? "hsl(209, 23%, 22%)"
           : "hsl(0, 0%, 100%)",
-        color: props.darkMode ? "hsl(0, 0%, 100%)" : "hsl(200, 15%, 8%)"
+        color: props.darkMode ? "hsl(0, 0%, 100%)" : "hsl(200, 15%, 8%)",
+        cursor: "pointer"
       }}
+      onClick={() => props.getCountryDetail(props.data.name.toLowerCase())}
     >
       <img
         className="rounded-top"
