@@ -106,11 +106,13 @@ class Filter extends Component {
                           state.selected === filter.key ? "" : filter.key
                       }),
                       () => {
-                        this.props.getCountriesByRange({
-                          name: filter.value.toLowerCase(),
-                          page: 0
-                        });
-                        this.props.getFilter(filter.value.toLowerCase());
+                        this.props.getFilter(this.state.selected);
+                        this.state.selected === ""
+                          ? this.props.getCountries({ page: 0 })
+                          : this.props.getCountriesByRange({
+                              name: filter.key,
+                              page: 0
+                            });
                       }
                     );
                   }}

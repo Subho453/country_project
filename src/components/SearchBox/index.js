@@ -21,6 +21,7 @@ const SearchBox = props => {
         }}
         className="ml-4"
         placeholder="Search for a country..."
+        onChange={e => props.handleSearch(e.target.value)}
       />
     </div>
   );

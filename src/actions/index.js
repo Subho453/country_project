@@ -59,7 +59,10 @@ const setCountryNameError = error => ({
 const goBack = () => ({
   type: "GO_BACK"
 });
-
+const getSearchedData = data => ({
+  type: "GET_SEARCHED_DATA",
+  payload: data
+});
 export {
   getCountries,
   setCountriesData,
@@ -73,5 +76,6 @@ export {
   getCountryName,
   setCountryNameData,
   setCountryNameError,
-  goBack
+  goBack,
+  getSearchedData
 };

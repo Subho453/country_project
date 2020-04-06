@@ -10,8 +10,8 @@ class DetailPage extends Component {
   render() {
     return (
       <div
+        className="content"
         style={{
-          height: "85vh",
           color: this.props.darkMode ? "hsl(0, 0%, 100%)" : "hsl(200, 15%, 8%)"
         }}
       >
@@ -31,27 +31,19 @@ class DetailPage extends Component {
           <i className="mr-2 fa fa-long-arrow-left" aria-hidden="true"></i>
           <h6 className="m-0">Back</h6>
         </div>
-        <div
-          className="d-flex justify-content-between align-items-center"
-          style={{ marginTop: 100 }}
-        >
-          <div style={{ width: 500 }}>
+        <div className="detail">
+          <div>
             <img
-              className="rounded-top"
+              className="rounded-top image"
               src={this.props.countryDetail.flag}
-              width="100%"
-              height="50%"
               alt="flag"
             />
           </div>
-          <div>
+          <div className="box">
             <h4 className="my-3" style={{ fontWeight: 600 }}>
               {this.props.countryDetail.name}
             </h4>
-            <div
-              className="d-flex justify-content-between"
-              style={{ width: 480 }}
-            >
+            <div className="detail-content">
               <div>
                 <div className="my-2 d-flex align-items-center">
                   <span style={{ fontSize: 13, fontWeight: 600 }}>
@@ -161,13 +153,13 @@ class DetailPage extends Component {
                 </div>
               </div>
             </div>
-            <div className="my-2 d-flex align-items-center">
+            <div className="borders">
               <span style={{ fontSize: 13, fontWeight: 600 }}>
                 Border Countries:
               </span>
               <span
                 className="d-flex flex-wrap"
-                style={{ color: "hsl(0, 0%, 52%)", width: 400 }}
+                style={{ color: "hsl(0, 0%, 52%)" }}
               >
                 {this.props.borders.map(name => (
                   <div

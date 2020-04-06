@@ -14,10 +14,9 @@ const Card = props => {
       onClick={() => props.getCountryDetail(props.data.name.toLowerCase())}
     >
       <img
-        className="rounded-top"
+        className="rounded-top flag"
         src={props.data.flag}
         width="100%"
-        height="50%"
         alt="flag"
       />
       <div className="p-4">

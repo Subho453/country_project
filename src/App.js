@@ -11,25 +11,46 @@ import {
   getCountryDetail,
   getCountriesByRange,
   getCountryName,
-  goBack
+  goBack,
+  getSearchedData
 } from "./actions";
 import DetailPage from "./components/DetailPage";
 class App extends Component {
   state = {
     darkMode: false,
     page: 0,
-    filterBy: ""
+    filterBy: "",
+    searched: false,
+    searchedData: []
   };
   setDarkMode = () => {
     this.setState(state => ({ darkMode: !state.darkMode }));
   };
   getFilter = filter => {
-    this.setState({ filterBy: filter });
+    this.setState({ filterBy: filter, page: 0 });
+  };
+  handleSearch = value => {
+    let searchedData = [];
+    if (value === "") {
+      this.setState({ searchedData, searched: false });
+    } else {
+      this.props.data.allcountries.map(item => {
+        if (item.name.toLowerCase().includes(value)) {
+          searchedData.push(item);
+        }
+      });
+      this.setState({ searchedData, searched: true });
+      this.props.getSearchedData({
+        data: this.state.searchedData,
+        page: 0
+      });
+    }
   };
   componentDidMount = async () => {
     this.props.getCountries({ page: 0 });
   };
   render() {
+    console.log("main", this.state.searchedData);
     return (
       <>
         <div
@@ -37,7 +58,7 @@ class App extends Component {
             backgroundColor: this.state.darkMode
               ? "hsl(207, 26%, 17%)"
               : "hsl(0, 0%, 98%)",
-            height: "auto"
+            minHeight: "100vh"
           }}
         >
           <Navbar
@@ -55,12 +76,16 @@ class App extends Component {
               />
             ) : (
               <>
-                <div className="d-flex justify-content-between align-items-center">
-                  <SearchBox darkMode={this.state.darkMode} />
+                <div className="filters">
+                  <SearchBox
+                    darkMode={this.state.darkMode}
+                    handleSearch={this.handleSearch}
+                  />
                   <Filter
                     darkMode={this.state.darkMode}
                     filter={this.state.filterBy}
                     getCountriesByRange={this.props.getCountriesByRange}
+                    getCountries={this.props.getCountries}
                     getFilter={this.getFilter}
                   />
                 </div>
@@ -74,7 +99,9 @@ class App extends Component {
                   ))}
                 </div>
                 <nav
-                  style={{ marginTop: -50 }}
+                  style={{
+                    marginTop: -50
+                  }}
                   className="d-flex justify-content-end"
                   aria-label="Page navigation example"
                 >
@@ -90,15 +117,23 @@ class App extends Component {
                           state => ({
                             page: state.page > 0 && state.page - 1
                           }),
-                          () =>
-                            this.state.filterBy !== ""
-                              ? this.props.getCountriesByRange({
-                                  name: this.state.filterBy,
-                                  page: this.state.page
-                                })
-                              : this.props.getCountries({
-                                  page: this.state.page
-                                })
+                          () => {
+                            if (this.state.searched) {
+                              this.props.getSearchedData({
+                                data: this.state.searchedData,
+                                page: this.state.page
+                              });
+                            } else {
+                              this.state.filterBy !== ""
+                                ? this.props.getCountriesByRange({
+                                    name: this.state.filterBy,
+                                    page: this.state.page
+                                  })
+                                : this.props.getCountries({
+                                    page: this.state.page
+                                  });
+                            }
+                          }
                         )
                       }
                     >
@@ -130,15 +165,23 @@ class App extends Component {
                           state => ({
                             page: state.page + 1
                           }),
-                          () =>
-                            this.state.filterBy !== ""
-                              ? this.props.getCountriesByRange({
-                                  name: this.state.filterBy,
-                                  page: this.state.page
-                                })
-                              : this.props.getCountries({
-                                  page: this.state.page
-                                })
+                          () => {
+                            if (this.state.searched) {
+                              this.props.getSearchedData({
+                                data: this.state.searchedData,
+                                page: this.state.page
+                              });
+                            } else {
+                              this.state.filterBy !== ""
+                                ? this.props.getCountriesByRange({
+                                    name: this.state.filterBy,
+                                    page: this.state.page
+                                  })
+                                : this.props.getCountries({
+                                    page: this.state.page
+                                  });
+                            }
+                          }
                         )
                       }
                     >
@@ -168,7 +211,8 @@ const mapDispatchToProps = dispatch => ({
   getCountryDetail: name => dispatch(getCountryDetail(name)),
   getCountriesByRange: data => dispatch(getCountriesByRange(data)),
   getCountryName: code => dispatch(getCountryName(code)),
-  goBack: () => dispatch(goBack())
+  goBack: () => dispatch(goBack()),
+  getSearchedData: data => dispatch(getSearchedData(data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

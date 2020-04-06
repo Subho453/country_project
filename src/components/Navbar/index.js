@@ -12,14 +12,14 @@ const Navbar = props => {
       }}
     >
       <div className="container p-3 d-flex justify-content-between align-items-center">
-        <h3 style={{ fontWeight: 600 }}>Where in the world?</h3>
+        <h3 className="title m-0">Where in the world?</h3>
         <div
           className="d-flex align-items-center"
           style={{ cursor: "pointer" }}
           onClick={() => props.setDarkMode()}
         >
           <i className="fa fa-moon-o" aria-hidden="true"></i>
-          <h6 className="mb-0 ml-2">
+          <h6 className="mode mb-0 ml-2">
             {props.darkMode ? "Light Mode" : "Dark Mode"}
           </h6>
         </div>
