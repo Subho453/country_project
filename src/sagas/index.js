@@ -3,7 +3,7 @@ import {
   getAllCountries,
   getCountryDetail,
   getCountryName,
-  getCountriesByRegion
+  getCountriesByRegion,
 } from "../api";
 import {
   setCountriesData,
@@ -13,13 +13,13 @@ import {
   setCountryNameData,
   setCountryNameError,
   setCountriesByRangeData,
-  setCountriesByRangeError
+  setCountriesByRangeError,
 } from "../actions";
 
-function* handleCountries(action) {
+function* handleCountries() {
   try {
     const res = yield call(getAllCountries);
-    yield put(setCountriesData({ data: res, page: action.payload.page }));
+    yield put(setCountriesData({ data: res }));
   } catch (error) {
     yield put(setCountriesError(error));
   }
@@ -35,25 +35,14 @@ function* handleCountryDetail(action) {
 function* handleCountriesByRegion(action) {
   try {
     const res = yield call(getCountriesByRegion, action.payload.name);
-    yield put(
-      setCountriesByRangeData({ data: res, page: action.payload.page })
-    );
+    yield put(setCountriesByRangeData({ data: res }));
   } catch (error) {
     yield put(setCountriesByRangeError(error));
-  }
-}
-function* handleCountryName(action) {
-  try {
-    const res = yield call(getCountryName, action.payload.code);
-    yield put(setCountryNameData(res));
-  } catch (error) {
-    yield put(setCountryNameError(error));
   }
 }
 
 export default function* rootSaga() {
   yield takeEvery("GET_COUNTRIES_REQUEST", handleCountries);
   yield takeEvery("GET_COUNTRY_DETAIL_REQUEST", handleCountryDetail);
-  yield takeEvery("GET_COUNTRY_NAME_REQUEST", handleCountryName);
   yield takeEvery("GET_COUNTRIES_BY_REGION_REQUEST", handleCountriesByRegion);
 }

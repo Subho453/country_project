@@ -1,17 +1,19 @@
 import React from "react";
 
-const Card = props => {
+const Card = (props) => {
   return (
     <div
       className="card rounded"
       style={{
-        backgroundColor: props.darkMode
-          ? "hsl(209, 23%, 22%)"
-          : "hsl(0, 0%, 100%)",
-        color: props.darkMode ? "hsl(0, 0%, 100%)" : "hsl(200, 15%, 8%)",
-        cursor: "pointer"
+        backgroundColor:
+          props.theme === "dark" ? "hsl(209, 23%, 22%)" : "hsl(0, 0%, 100%)",
+        color:
+          props.theme === "dark" ? "hsl(0, 0%, 100%)" : "hsl(200, 15%, 8%)",
+        cursor: "pointer",
       }}
-      onClick={() => props.getCountryDetail(props.data.name.toLowerCase())}
+      onClick={() => {
+        props.history.push(`/country/${props.data.name.toLowerCase()}`);
+      }}
     >
       <img
         className="rounded-top flag"

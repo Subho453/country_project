@@ -1,68 +1,46 @@
-const getCountries = page => ({
+const getCountries = () => ({
   type: "GET_COUNTRIES_REQUEST",
-  payload: page
 });
 
-const setCountriesData = data => ({
+const setCountriesData = (data) => ({
   type: "GET_COUNTRIES_SUCCESS",
-  payload: data
+  payload: data,
 });
 
-const setCountriesError = error => ({
+const setCountriesError = (error) => ({
   type: "GET_COUNTRIES_FAILURE",
-  payload: { error }
+  payload: { error },
 });
 
-const getCountryDetail = name => ({
+const getCountryDetail = (name) => ({
   type: "GET_COUNTRY_DETAIL_REQUEST",
-  payload: { name }
+  payload: { name },
 });
 
-const setCountryDetailData = data => ({
+const setCountryDetailData = (data) => ({
   type: "GET_COUNTRY_DETAIL_SUCCESS",
-  payload: { data }
+  payload: { data },
 });
 
-const setCountryDetailError = error => ({
+const setCountryDetailError = (error) => ({
   type: "GET_COUNTRY_DETAIL_FAILURE",
-  payload: { error }
+  payload: { error },
 });
-const getCountriesByRange = data => ({
+const getCountriesByRange = (data) => ({
   type: "GET_COUNTRIES_BY_REGION_REQUEST",
-  payload: data
+  payload: data,
 });
 
-const setCountriesByRangeData = data => ({
+const setCountriesByRangeData = (data) => ({
   type: "GET_COUNTRIES_BY_REGION_SUCCESS",
-  payload: data
+  payload: data,
 });
 
-const setCountriesByRangeError = error => ({
+const setCountriesByRangeError = (error) => ({
   type: "GET_COUNTRIES_BY_REGION_FAILURE",
-  payload: { error }
+  payload: { error },
 });
 
-const getCountryName = code => ({
-  type: "GET_COUNTRY_NAME_REQUEST",
-  payload: { code }
-});
-
-const setCountryNameData = data => ({
-  type: "GET_COUNTRY_NAME_SUCCESS",
-  payload: { data }
-});
-
-const setCountryNameError = error => ({
-  type: "GET_COUNTRY_NAME_FAILURE",
-  payload: { error }
-});
-const goBack = () => ({
-  type: "GO_BACK"
-});
-const getSearchedData = data => ({
-  type: "GET_SEARCHED_DATA",
-  payload: data
-});
 export {
   getCountries,
   setCountriesData,
@@ -73,9 +51,4 @@ export {
   getCountriesByRange,
   setCountriesByRangeData,
   setCountriesByRangeError,
-  getCountryName,
-  setCountryNameData,
-  setCountryNameError,
-  goBack,
-  getSearchedData
 };
