@@ -77,14 +77,13 @@ class MainPage extends Component {
           <ul className="pagination" style={{ border: "none" }}>
             <li
               style={{
-                pointerEvents: this.state.page === 0 && "none",
                 opacity: this.state.page === 0 && 0.6,
-                cursor: "pointer",
+                cursor: this.state.page === 0 ? "not-allowed" : "pointer",
               }}
               className="page-item"
               onClick={() =>
                 this.setState((state) => ({
-                  page: state.page > 0 && state.page - 1,
+                  page: state.page === 0 ? 0 : state.page - 1,
                 }))
               }
             >
@@ -125,19 +124,20 @@ class MainPage extends Component {
                       : "hsl(200, 15%, 8%)",
                 }}
               >
-                {this.state.page + 1}
+                {this.state.page + 1} to {total}
               </div>
             </li>
             <li
               style={{
-                pointerEvents: this.state.page === total && "none",
-                opacity: this.state.page === total && 0.6,
-                cursor: "pointer",
+                opacity: this.state.page === total - 1 && 0.6,
+                cursor:
+                  this.state.page === total - 1 ? "not-allowed" : "pointer",
               }}
               className="page-item"
               onClick={() =>
                 this.setState((state) => ({
-                  page: state.page + 1,
+                  page:
+                    this.state.page === total - 1 ? total - 1 : state.page + 1,
                 }))
               }
             >
