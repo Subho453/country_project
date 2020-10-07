@@ -20,7 +20,7 @@ class MainPage extends Component {
       this.setState({ searchedData, searched: false });
     } else {
       this.props.countries.map((item) => {
-        if (item.name.toLowerCase().includes(value)) {
+        if (item.name.toLowerCase().includes(value.toLowerCase().trim())) {
           searchedData.push(item);
         }
       });
@@ -45,7 +45,6 @@ class MainPage extends Component {
               <Filter
                 theme={theme}
                 darkMode={this.props.darkMode}
-                filter={this.props.filter}
                 getCountriesByRange={this.props.getCountriesByRange}
                 getCountries={this.props.getCountries}
                 getFilter={this.getFilter}

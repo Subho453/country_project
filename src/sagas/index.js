@@ -2,7 +2,6 @@ import { takeEvery, call, put } from "redux-saga/effects";
 import {
   getAllCountries,
   getCountryDetail,
-  getCountryName,
   getCountriesByRegion,
 } from "../api";
 import {
@@ -10,8 +9,6 @@ import {
   setCountriesError,
   setCountryDetailData,
   setCountryDetailError,
-  setCountryNameData,
-  setCountryNameError,
   setCountriesByRangeData,
   setCountriesByRangeError,
 } from "../actions";

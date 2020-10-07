@@ -2,6 +2,10 @@ import React, { Component } from "react";
 
 const Regions = [
   {
+    key: "",
+    value: "Default",
+  },
+  {
     key: "africa",
     value: "Africa",
   },
@@ -25,7 +29,7 @@ const Regions = [
 class Filter extends Component {
   state = {
     clicked: false,
-    selected: this.props.filter,
+    selected: "",
   };
   selectBtn = [];
   componentDidMount() {
@@ -55,7 +59,12 @@ class Filter extends Component {
             cursor: "pointer",
           }}
         >
-          <h6 className="m-0">Filter by Region</h6>
+          <h6 className="m-0">
+            {this.state.selected === ""
+              ? "Filter by Region"
+              : this.state.selected.charAt(0).toUpperCase() +
+                this.state.selected.slice(1)}
+          </h6>
           <i className="ml-3 fa fa-chevron-down" aria-hidden="true"></i>
         </div>
         <div ref={(node) => (this.selectBtn["options"] = node)}>
@@ -65,6 +74,10 @@ class Filter extends Component {
               style={{
                 width: 200,
                 zIndex: 1,
+                backgroundColor:
+                  this.props.theme === "dark"
+                    ? "hsl(209, 23%, 22%)"
+                    : "hsl(0, 0%, 100%)",
               }}
             >
               {Regions.map((filter) => (
